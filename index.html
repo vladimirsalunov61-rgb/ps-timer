@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PS Таймер">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>PS Таймер · Учёт клуба</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1120;--panel:#121c2e;--panel2:#18243a;--line:#293750;--text:#f4f7fb;--muted:#9eacc2;--green:#37d39a;--red:#ff687a;--blue:#76a9ff;--yellow:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 500px at 50% -150px,#203657 0%,var(--bg) 65%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom);font-variant-numeric:tabular-nums}
+main{max-width:1100px;margin:0 auto;padding:16px 0 36px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:11px}.logo{display:grid;place-items:center;width:46px;height:46px;border-radius:15px;background:linear-gradient(145deg,#8b5cf6,#3b82f6);font-size:24px;box-shadow:0 8px 30px #3b82f633}.brand h1{font-size:21px;margin:0}.brand p{margin:4px 0 0;color:var(--muted);font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);border-radius:12px;padding:10px 13px;background:var(--panel2);color:var(--text);font-weight:650;font-size:13px;cursor:pointer}.btn.primary{background:var(--green);border-color:var(--green);color:#06261b}.btn.danger{color:#ffd8dd;border-color:#6c3341;background:#351d2a}.btn:disabled{opacity:.45;cursor:not-allowed}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.metric{background:linear-gradient(150deg,#17243a,#111a2a);border:1px solid var(--line);padding:15px;border-radius:17px;min-width:0}.metric .label{font-size:12px;color:var(--muted)}.metric strong{display:block;font-size:clamp(18px,4vw,26px);margin-top:7px;overflow-wrap:anywhere}.metric small{color:var(--muted)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:24px 0 12px}.section-head h2{font-size:17px;margin:0}.sub{font-size:12px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:11px}.station{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;min-width:0;transition:border-color .2s}.station.running{border-color:#247c63;box-shadow:inset 0 0 0 1px #247c6322}.station-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.station-name{font-weight:750;font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pill{font-size:10px;border-radius:100px;padding:5px 8px;background:#28364d;color:#bac8dd;white-space:nowrap}.running .pill{background:#143e35;color:#74efc2}.elapsed{font-size:27px;font-weight:750;letter-spacing:-.8px;margin:17px 0 2px}.started{font-size:11px;color:var(--muted);min-height:15px}.cost-row{display:flex;align-items:end;justify-content:space-between;gap:8px;margin:14px 0}.cost-label{font-size:11px;color:var(--muted)}.cost{font-size:20px;font-weight:750;color:var(--green);white-space:nowrap}.station-actions{display:flex;gap:7px}.station-actions .btn{flex:1;padding:10px 8px}.mini-edit{background:transparent;border:0;color:var(--muted);font-size:18px;padding:0 3px;cursor:pointer}.history-wrap{overflow:auto;border:1px solid var(--line);border-radius:15px;background:var(--panel)}table{border-collapse:collapse;width:100%;min-width:640px;font-size:12px}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600;background:#172238}tr:last-child td{border-bottom:0}.empty{text-align:center;color:var(--muted);padding:24px}.settings{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:16px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}.field input,.field select{width:100%;padding:11px 12px;border-radius:10px;background:#0b1322;border:1px solid var(--line);color:var(--text);font-size:15px}.field small{display:block;color:var(--muted);font-size:11px;margin-top:6px}.foot{color:var(--muted);font-size:11px;line-height:1.5;margin-top:20px}.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#f3f7fc;color:#111827;padding:12px 16px;border-radius:13px;box-shadow:0 12px 40px #0008;font-size:13px;z-index:5;max-width:calc(100% - 24px);display:none}.hidden{display:none!important}
+@media(max-width:540px){main{padding-top:10px}.brand h1{font-size:19px}.actions{width:100%}.actions .btn{flex:1}.summary{gap:7px;margin:15px 0}.metric{padding:11px;border-radius:14px}.metric .label{font-size:10px}.metric strong{font-size:18px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.station{padding:11px;border-radius:15px}.station-name{font-size:13px}.elapsed{font-size:22px;margin-top:15px}.cost{font-size:16px}.station-actions{flex-direction:column}.station-actions .btn{padding:9px 5px}.started{font-size:10px}.pill{font-size:9px;padding:4px 6px}}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div class="brand"><div class="logo">🎮</div><div><h1>PS Таймер</h1><p>Учёт игровых сеансов · узбекский сум</p></div></div>
+    <div class="actions">
+      <button class="btn" id="installBtn" hidden>＋ На главный экран</button>
+      <button class="btn" id="exportBtn">Экспорт CSV</button>
+      <button class="btn" id="settingsToggle">⚙ Тарифы</button>
+    </div>
+  </header>
+  <section class="summary" aria-label="Сводка">
+    <div class="metric"><div class="label">Активные сеансы</div><strong id="activeCount">0</strong><small>из всех приставок</small></div>
+    <div class="metric"><div class="label">Выручка сегодня</div><strong id="todayRevenue">0 сум</strong><small id="todayCount">0 завершённых сеансов</small></div>
+    <div class="metric"><div class="label">Выручка всего</div><strong id="allRevenue">0 сум</strong><small id="allCount">0 завершённых сеансов</small></div>
+  </section>
+  <section id="settingsPanel" class="hidden">
+    <div class="section-head"><h2>Настройки клуба</h2><span class="sub">Сохраняются на этом устройстве</span></div>
+    <div class="settings">
+      <div class="field"><label for="hourlyRate">Цена за час (сум)</label><input id="hourlyRate" type="number" min="0" step="500" inputmode="numeric" value="20000"><small>Стоимость рассчитывается пропорционально минутам и секундам, итог округляется до целого сума.</small></div>
+      <div class="field"><label for="stationCount">Количество приставок</label><input id="stationCount" type="number" min="1" step="1" value="20" inputmode="numeric"><small>Можно добавить до 500 независимых таймеров.</small></div>
+      <div class="field"><label for="clubName">Название клуба (необязательно)</label><input id="clubName" type="text" maxlength="50" placeholder="Например, PS Club"></div>
+      <div class="field"><label>Сохранение данных</label><button class="btn" id="backupBtn" style="width:100%">Скачать резервную копию</button><small>История хранится в браузере этого устройства. Делай резервные копии регулярно.</small></div>
+      <div class="field"><label for="restoreFile">Восстановить резервную копию</label><input id="restoreFile" type="file" accept=".json,application/json"><small>Импорт заменит данные, сохранённые в этом браузере.</small></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:10px"><button class="btn primary" id="saveSettings">Сохранить настройки</button></div>
+  </section>
+  <div class="section-head"><h2>Приставки</h2><span class="sub" id="stationHint">Нажми «Старт» при посадке клиента</span></div>
+  <section id="stations" class="grid"></section>
+  <div class="section-head"><h2>История сеансов</h2><button class="btn danger" id="clearHistory">Очистить историю</button></div>
+  <div class="history-wrap"><table><thead><tr><th>Приставка</th><th>Начало</th><th>Конец</th><th>Время</th><th>Тариф</th><th>Оплата</th></tr></thead><tbody id="historyBody"></tbody></table><div class="empty" id="historyEmpty">Завершённых сеансов пока нет.</div></div>
+  <p class="foot">Важно: данные сохраняются локально в браузере. Не очищай историю Safari и не удаляй данные сайта без резервной копии. Для синхронизации между разными устройствами потребуется отдельное облачное хранилище. Если клиент ещё играет, расчёт текущей стоимости обновляется на экране каждую секунду.</p>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const KEY='psTimerUz.v1';
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0}).format(Math.round(n))+' сум';
+const dateTime=t=>new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(new Date(t));
+const shortTime=t=>new Intl.DateTimeFormat('ru-RU',{hour:'2-digit',minute:'2-digit'}).format(new Date(t));
+const dayKey=t=>{const d=new Date(t);return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`};
+let deferredPrompt=null, toastTimer=null;
+let state={rate:20000,clubName:'',stations:[],history:[]};
+function newStation(i){return {id:'s'+i,name:'PS '+i,startedAt:null,rateAtStart:null};}
+function load(){
+ try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&Array.isArray(saved.stations)&&Array.isArray(saved.history)){state={...state,...saved};return;}}catch(e){}
+ state.stations=Array.from({length:20},(_,i)=>newStation(i+1));
+}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){showToast('Не удалось сохранить. Экспортируй резервную копию и освободи память браузера.');}}
+function showToast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display='none',3000);}
+function elapsed(s,now=Date.now()){return s.startedAt?Math.max(0,now-s.startedAt):0;}
+function amount(ms,rate){return Math.round(ms/3600000*rate);}
+function renderStations(){
+ const root=$('stations'),now=Date.now();root.innerHTML='';
+ state.stations.forEach((s,idx)=>{
+  const ms=elapsed(s,now),live=!!s.startedAt,rate=live?(s.rateAtStart??state.rate):state.rate;
+  const card=document.createElement('article');card.className='station'+(live?' running':'');
+  card.innerHTML=`<div class="station-top"><div class="station-name" title="${escapeHtml(s.name)}">${escapeHtml(s.name)}</div><button class="mini-edit" data-rename="${s.id}" aria-label="Переименовать ${escapeHtml(s.name)}" title="Переименовать">✎</button><span class="pill">${live?'ИДЁТ ИГРА':'СВОБОДНА'}</span></div>
+  <div class="elapsed" data-elapsed="${s.id}">${fmtElapsed(ms)}</div><div class="started">${live?'Старт: '+shortTime(s.startedAt):'Ожидает клиента'}</div>
+  <div class="cost-row"><div><div class="cost-label">К оплате</div><div class="cost" data-cost="${s.id}">${money(live?amount(ms,rate):0)}</div></div><div class="cost-label">${money(rate)} / час</div></div>
+  <div class="station-actions">${live?`<button class="btn danger" data-stop="${s.id}">■ Стоп и расчёт</button>`:`<button class="btn primary" data-start="${s.id}">▶ Старт</button>`}<button class="btn" data-reset="${s.id}" ${live?'disabled':''}>Сброс</button></div>`;
+  root.appendChild(card);
+ });
+ root.querySelectorAll('[data-start]').forEach(b=>b.onclick=()=>start(b.dataset.start));
+ root.querySelectorAll('[data-stop]').forEach(b=>b.onclick=()=>stop(b.dataset.stop));
+ root.querySelectorAll('[data-reset]').forEach(b=>b.onclick=()=>resetStation(b.dataset.reset));
+ root.querySelectorAll('[data-rename]').forEach(b=>b.onclick=()=>renameStation(b.dataset.rename));
+}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function fmtElapsed(ms){let sec=Math.floor(ms/1000),h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;return [h,m,s].map((v,i)=>i===0?String(v).padStart(2,'0'):String(v).padStart(2,'0')).join(':');}
+function start(id){const s=state.stations.find(x=>x.id===id);if(!s||s.startedAt)return;s.startedAt=Date.now();s.rateAtStart=state.rate;persist();renderAll();showToast(s.name+': таймер запущен');}
+function stop(id){const s=state.stations.find(x=>x.id===id);if(!s||!s.startedAt)return;const end=Date.now(),ms=Math.max(0,end-s.startedAt),rate=s.rateAtStart??state.rate,fee=amount(ms,rate);state.history.unshift({id:crypto.randomUUID?crypto.randomUUID():String(end)+Math.random(),station:s.name,start:s.startedAt,end,durationMs:ms,rate,fee});s.startedAt=null;s.rateAtStart=null;persist();renderAll();showToast(`${s.name}: ${fmtElapsed(ms)} · ${money(fee)}`);}
+function resetStation(id){const s=state.stations.find(x=>x.id===id);if(!s||s.startedAt)return;if(confirm(`Сбросить карточку ${s.name}? История не удалится.`)){s.name='PS '+(state.stations.indexOf(s)+1);renderAll();persist();}}
+function renameStation(id){const s=state.stations.find(x=>x.id===id);if(!s)return;const name=prompt('Название приставки:',s.name);if(name===null)return;const clean=name.trim().slice(0,40);if(!clean){showToast('Название не может быть пустым');return;}s.name=clean;persist();renderAll();}
+function renderHistory(){const body=$('historyBody');body.innerHTML='';const rows=state.history.slice(0,200);$('historyEmpty').style.display=rows.length?'none':'block';rows.forEach(h=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${escapeHtml(h.station)}</td><td>${dateTime(h.start)}</td><td>${dateTime(h.end)}</td><td>${fmtElapsed(h.durationMs)}</td><td>${money(h.rate)}/ч</td><td><strong>${money(h.fee)}</strong></td>`;body.appendChild(tr);});}
+function renderSummary(){const now=Date.now(),today=state.history.filter(h=>dayKey(h.end)===dayKey(now));$('activeCount').textContent=state.stations.filter(s=>s.startedAt).length;$('todayRevenue').textContent=money(today.reduce((a,h)=>a+h.fee,0));$('todayCount').textContent=today.length+' завершённых сеансов';$('allRevenue').textContent=money(state.history.reduce((a,h)=>a+h.fee,0));$('allCount').textContent=state.history.length+' завершённых сеансов';$('stationHint').textContent=state.stations.length+' приставок · '+(state.clubName?state.clubName:'каждый таймер независим');}
+function renderLive(){const now=Date.now();state.stations.forEach(s=>{if(!s.startedAt)return;const el=document.querySelector(`[data-elapsed="${s.id}"]`),cost=document.querySelector(`[data-cost="${s.id}"]`);if(el)el.textContent=fmtElapsed(elapsed(s,now));if(cost)cost.textContent=money(amount(elapsed(s,now),s.rateAtStart??state.rate));});}
+function renderAll(){renderStations();renderHistory();renderSummary();fillSettings();}
+function fillSettings(){$('hourlyRate').value=state.rate;$('stationCount').value=state.stations.length;$('clubName').value=state.clubName||'';}
+$('settingsToggle').onclick=()=>{$('settingsPanel').classList.toggle('hidden');};
+$('saveSettings').onclick=()=>{const rate=Number($('hourlyRate').value),count=Number($('stationCount').value);if(!Number.isFinite(rate)||rate<0||rate>1e9){showToast('Проверь цену за час');return;}if(!Number.isInteger(count)||count<1||count>100000){showToast('Укажи целое число приставок больше нуля');return;}state.rate=rate;state.clubName=$('clubName').value.trim().slice(0,50);while(state.stations.length<count)state.stations.push(newStation(state.stations.length+1));if(count<state.stations.length){const removed=state.stations.slice(count);if(removed.some(s=>s.startedAt)){showToast('Нельзя удалить приставки с активными таймерами');return;}if(!confirm(`Удалить ${state.stations.length-count} приставок из списка? История останется.`))return;state.stations=state.stations.slice(0,count);}persist();renderAll();$('settingsPanel').classList.add('hidden');showToast('Настройки сохранены');};
+$('clearHistory').onclick=()=>{if(!state.history.length){showToast('История уже пуста');return;}if(confirm('Точно очистить всю историю? Это нельзя отменить. Сначала можно скачать резервную копию.')){state.history=[];persist();renderAll();}};
+function csvCell(v){return '"'+String(v).replace(/"/g,'""')+'"';}
+$('exportBtn').onclick=()=>{const rows=[['Приставка','Начало','Конец','Длительность','Тариф за час, сум','Оплата, сум'],...state.history.map(h=>[h.station,dateTime(h.start),dateTime(h.end),fmtElapsed(h.durationMs),h.rate,h.fee])];const csv='\ufeff'+rows.map(r=>r.map(csvCell).join(';')).join('\r\n');download(new Blob([csv],{type:'text/csv;charset=utf-8'}),'ps-timer-istoriya.csv');showToast('История экспортирована в CSV');};
+$('backupBtn').onclick=()=>download(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),'ps-timer-backup.json');
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);}
+$('restoreFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const obj=JSON.parse(await f.text());if(!Array.isArray(obj.stations)||!Array.isArray(obj.history)||typeof obj.rate!=='number')throw Error();if(!confirm('Импортировать резервную копию? Текущие данные будут заменены.'))return;state={...state,...obj};persist();renderAll();showToast('Резервная копия восстановлена');}catch(err){showToast('Не удалось прочитать файл резервной копии');}e.target.value='';};
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').hidden=false;});
+$('installBtn').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('installBtn').hidden=true;}else showToast('На iPhone нажми «Поделиться» в Safari → «На экран Домой».');};
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+load();renderAll();setInterval(()=>{renderLive();renderSummary();},1000);
+</script>
+</body>
+</html>

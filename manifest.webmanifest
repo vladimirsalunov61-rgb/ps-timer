@@ -1,0 +1,11 @@
+{
+  "name": "PS Таймер — учёт PlayStation-клуба",
+  "short_name": "PS Таймер",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#101827",
+  "description": "Русский учёт игровых сеансов и оплаты в узбекских сумах"
+}
